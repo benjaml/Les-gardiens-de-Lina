@@ -13,11 +13,16 @@ public class Player : MonoBehaviour, IDestroyable{
     public float healthPoint;
     public float maxHealthPoint;
 
+    public float repelRadius;
+    public float repelDelay;
+    public float repelForce;
+
 
 
     Animator anim;
     bool invincible = false;
     bool shooting = false;
+    bool repel = false;
 
     void Awake()
     {
@@ -43,8 +48,19 @@ public class Player : MonoBehaviour, IDestroyable{
         }
         if (Input.GetAxisRaw("Fire1") < 0.5f && shooting)
         {
-            CancelInvoke();
+            CancelInvoke("Shoot");
             shooting = false;
+        }
+
+        if (Input.GetAxisRaw("Fire2") > 0.5f && !repel)
+        {
+            InvokeRepeating("Repel", 0f, repelDelay);
+            repel = true;
+        }
+        if (Input.GetAxisRaw("Fire2") < 0.5f && repel)
+        {
+            CancelInvoke("Repel");
+            repel = false;
         }
     }
 
@@ -90,6 +106,25 @@ public class Player : MonoBehaviour, IDestroyable{
     void Shoot()
     {
         currentWeapon.Shoot(playerId, fireStart.transform.position, transform.forward);
+    }
+    void Repel()
+    {
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position + transform.forward * repelRadius, repelRadius, transform.forward);
+        foreach(RaycastHit hit in hits)
+        {
+            if(hit.transform.gameObject != gameObject)
+            {
+                // add force on forward direction
+                if(hit.transform.GetComponent<Rigidbody>())
+                {
+                    Vector3 force = hit.transform.position - transform.position;
+                    force.Normalize();
+                    force *= repelForce;
+                    hit.transform.GetComponent<Rigidbody>().AddForce(force);
+                }
+            }
+        }
+
     }
 
     public void Death()

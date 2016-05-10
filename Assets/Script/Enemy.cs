@@ -83,6 +83,7 @@ public class Enemy : MonoBehaviour,IDestroyable {
         {
             speed = 0f;
             GetComponent<BoxCollider>().enabled = false;
+            Destroy(GetComponent<Rigidbody>());
             Invoke("Death", 0.2f);
         }
     }

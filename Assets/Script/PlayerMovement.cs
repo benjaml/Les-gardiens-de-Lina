@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour {
         float v = Input.GetAxisRaw("Vertical");
         float h = Input.GetAxisRaw("Horizontal");
 
-        rb.MovePosition(transform.position +new Vector3(h, 0.0f, v) * speed * Time.deltaTime);
+        rb.MovePosition(transform.position + new Vector3(h, 0.0f, v) * speed * Time.deltaTime);
 
         
         v = Input.GetAxisRaw("VerticalLook");

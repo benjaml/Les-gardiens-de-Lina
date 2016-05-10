@@ -386,6 +386,9 @@ MonoBehaviour:
   playerId: 1
   healthPoint: 10
   maxHealthPoint: 10
+  repelRadius: 5
+  repelDelay: 3
+  repelForce: 1000
 --- !u!82 &738793771
 AudioSource:
   m_ObjectHideFlags: 0
