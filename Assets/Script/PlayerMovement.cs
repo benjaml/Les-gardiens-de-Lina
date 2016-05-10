@@ -5,12 +5,11 @@ public class PlayerMovement : MonoBehaviour {
 
     public float speed;
     public float deadZone;
-    private CharacterController controller;
-
+    Rigidbody rb;
 
 	// Use this for initialization
 	void Start () {
-        controller = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
@@ -18,7 +17,7 @@ public class PlayerMovement : MonoBehaviour {
         float v = Input.GetAxisRaw("Vertical");
         float h = Input.GetAxisRaw("Horizontal");
 
-        controller.Move(new Vector3(h, 0.0f, v) * speed * Time.deltaTime);
+        rb.MovePosition(transform.position +new Vector3(h, 0.0f, v) * speed * Time.deltaTime);
 
         
         v = Input.GetAxisRaw("VerticalLook");

@@ -6,6 +6,7 @@ public class bullet : MonoBehaviour {
     public float damage;
     public float speed;
     public float lifeTime;
+    public int shooterId;
 
 	// Use this for initialization
 	void Start () {
@@ -19,11 +20,12 @@ public class bullet : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
+        Debug.Log("bullet " +col.transform.tag);
         if(col.GetComponent(typeof(IDestroyable)))
         {
             IDestroyable target = col.GetComponent(typeof(IDestroyable)) as IDestroyable;
             target.applyDamage(damage);
-
+            Destroy(gameObject);
         }
     }
 }
