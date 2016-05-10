@@ -75,10 +75,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1781e87f42e46d445a91d6faa9add720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  speed: 30
+  damage: 0.5
+  speed: 50
   lifeTime: 2
   shooterId: 0
+  knockBackForce: 0
 --- !u!135 &13522758
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -86,7 +87,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109532}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5

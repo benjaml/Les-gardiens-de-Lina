@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 
 public abstract class AbstractWeapon : AbstractPickable {
 
     public EnumerationGun.GunType type;
     public float damage;
+    public float dispersion;
     public float fireRate;
     public AudioClip sound;
     public GameObject bullet;
@@ -20,6 +20,10 @@ public abstract class AbstractWeapon : AbstractPickable {
 
     public void Shoot(int ShooterID,Vector3 startPos,Vector3 direction)
     {
+        Vector3 posToLook = transform.position + direction;
+        posToLook.x += Random.Range(-1f, 1f) * dispersion;
+        posToLook.z += Random.Range(-1f, 1f) * dispersion;
+        direction = (posToLook - transform.position).normalized;
         Instantiate(bullet, startPos, Quaternion.LookRotation(direction));
         GetComponent<AudioSource>().PlayOneShot(sound);
     }

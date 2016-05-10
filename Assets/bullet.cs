@@ -7,9 +7,10 @@ public class bullet : MonoBehaviour {
     public float speed;
     public float lifeTime;
     public int shooterId;
+    public float knockBackForce;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         Destroy(gameObject, lifeTime);
 	}
 	
@@ -20,11 +21,13 @@ public class bullet : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log("bullet " +col.transform.tag);
         if(col.GetComponent(typeof(IDestroyable)))
         {
             IDestroyable target = col.GetComponent(typeof(IDestroyable)) as IDestroyable;
             target.applyDamage(damage);
+            Vector3 knockback = transform.forward;
+            knockback *= knockBackForce;
+            col.GetComponent<Rigidbody>().AddForce(knockback);
             Destroy(gameObject);
         }
     }

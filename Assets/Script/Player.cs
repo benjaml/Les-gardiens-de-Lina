@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Player : MonoBehaviour, IDestroyable{
 
@@ -80,8 +81,10 @@ public class Player : MonoBehaviour, IDestroyable{
     }
 
     public void applyDamage(float damage, int killerID = -1)
-    {    
-
+    {
+        healthPoint -= damage;
+        if (healthPoint <= 0)
+            Death();
     }
 
     void Shoot()
@@ -91,11 +94,13 @@ public class Player : MonoBehaviour, IDestroyable{
 
     public void Death()
     {
-        // do nothing yet
+        Debug.Log("You are dead");
+        Destroy(gameObject);
     }
 
     void ResetInvincibility()
     {
         invincible = false;
     }
+    
 }

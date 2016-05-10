@@ -9,14 +9,13 @@ public class Enemy : MonoBehaviour,IDestroyable {
     public float size;
     public float damage;
     public float explosionDamage;
-
-    NavMeshAgent agent;
+    public float explosionForcePerSize;
+    
     public GameObject[] targets;
     public GameObject target;
 
     // Use this for initialization
     void Start () {
-        agent = GetComponent<NavMeshAgent>();
         targets = GameObject.FindGameObjectsWithTag("Player");
         target = GetClosest();
         InvokeRepeating("GetClosest", 0f, 1f);
@@ -43,9 +42,8 @@ public class Enemy : MonoBehaviour,IDestroyable {
         return ret;
     }
 
-    void OnTriggerEnter(Collider col)
+    void OnCollisionEnter(Collision col)
     {
-        Debug.Log(col.transform.tag);
         if(col.transform.tag == "Enemy")
         {
             Enemy other = col.transform.GetComponent<Enemy>();
@@ -62,12 +60,17 @@ public class Enemy : MonoBehaviour,IDestroyable {
                 Destroy(col.transform.gameObject);
             }
         }
+        else if(col.transform.tag == "Player")
+        {
+            Death();
+        }
     }
 
     void Fusion(Enemy enemy)
     {
+        health += enemy.size;
         size += enemy.size;
-        transform.localScale = Vector3.one * size;
+        transform.localScale = Vector3.one * (1+size/4);
         damage += enemy.damage;
         explosionDamage += enemy.explosionDamage;
         Destroy(enemy.gameObject);
@@ -76,12 +79,38 @@ public class Enemy : MonoBehaviour,IDestroyable {
     public void applyDamage(float damage, int killerID = -1)
     {
         health -= damage;
-        if (health < 0f)
-            Death();
+        if (health <= 0f)
+        {
+            speed = 0f;
+            GetComponent<BoxCollider>().enabled = false;
+            Invoke("Death", 0.2f);
+        }
     }
 
     public void Death()
     {
+        Explode();
         Destroy(gameObject);
+    }
+
+    void Explode()
+    {
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, (1 + size / 2f), Vector3.up);
+        foreach(RaycastHit hit in hits)
+        {
+            if(hit.transform.gameObject != gameObject)
+            {
+                if (hit.transform.GetComponent(typeof(IDestroyable)))
+                {
+                    IDestroyable target = hit.transform.GetComponent(typeof(IDestroyable)) as IDestroyable;
+
+                    target.applyDamage(damage);
+                    Vector3 knockbackForce = hit.transform.position - transform.position;
+                    knockbackForce.Normalize();
+                    knockbackForce *= (1+size/4f) * explosionForcePerSize;
+                    hit.transform.GetComponent<Rigidbody>().AddForce(knockbackForce);
+                }
+            }
+        }
     }
 }
