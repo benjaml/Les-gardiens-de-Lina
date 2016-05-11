@@ -17,6 +17,8 @@ public class Player : MonoBehaviour, IDestroyable{
     public float repelDelay;
     public float repelForce;
 
+   
+
 
     
     bool invincible = false;
@@ -33,23 +35,23 @@ public class Player : MonoBehaviour, IDestroyable{
     // Update is called once per frame
 	void Update () {
 
-        if (Input.GetAxisRaw("Fire1")>0.5f && !shooting)
+        if (XInput.instance.getTriggerRight(playerId)>0.5f && !shooting)
         {
             InvokeRepeating("Shoot",0f,currentWeapon.fireRate);
             shooting = true;
         }
-        if (Input.GetAxisRaw("Fire1") < 0.5f && shooting)
+        if (XInput.instance.getTriggerRight(playerId) < 0.5f && shooting)
         {
             CancelInvoke("Shoot");
             shooting = false;
         }
 
-        if (Input.GetAxisRaw("Fire2") > 0.5f && !repel)
+        if (XInput.instance.getTriggerLeft(playerId) > 0.5f && !repel)
         {
             InvokeRepeating("Repel", 0f, repelDelay);
             repel = true;
         }
-        if (Input.GetAxisRaw("Fire2") < 0.5f && repel)
+        if (XInput.instance.getTriggerLeft(playerId) < 0.5f && repel)
         {
             CancelInvoke("Repel");
             repel = false;
@@ -98,7 +100,10 @@ public class Player : MonoBehaviour, IDestroyable{
 
     void Shoot()
     {
-        currentWeapon.Shoot(playerId, fireStart.transform.position, transform.forward);
+        Vector3 direction = fireStart.transform.position - transform.position;
+        direction.y = 0f;
+        direction.Normalize();
+        currentWeapon.Shoot(playerId, fireStart.transform.position, direction);
     }
 
     void Repel()
@@ -123,7 +128,6 @@ public class Player : MonoBehaviour, IDestroyable{
 
     public void Death()
     {
-        Debug.Log("You are dead");
         Destroy(gameObject);
     }
 
