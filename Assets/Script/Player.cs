@@ -18,8 +18,7 @@ public class Player : MonoBehaviour, IDestroyable{
     public float repelForce;
 
 
-
-    Animator anim;
+    
     bool invincible = false;
     bool shooting = false;
     bool repel = false;
@@ -29,16 +28,9 @@ public class Player : MonoBehaviour, IDestroyable{
         Gun gun = gameObject.AddComponent<Gun>();
         gun.AttachTo(gameObject,typeof(Gun));
         healthPoint = maxHealthPoint;
-        anim = GetComponentInChildren<Animator>();
     }
 
-    
-	// Use this for initialization
-	void Start () {
-
-	}
-	
-	// Update is called once per frame
+    // Update is called once per frame
 	void Update () {
 
         if (Input.GetAxisRaw("Fire1")>0.5f && !shooting)
@@ -73,6 +65,7 @@ public class Player : MonoBehaviour, IDestroyable{
         switch(typeOfGun)
         {
             case EnumerationGun.GunType.GUN:
+                type = typeof(Gun);
                 break;
             case EnumerationGun.GunType.LASERGUN:
                 break;
@@ -107,6 +100,7 @@ public class Player : MonoBehaviour, IDestroyable{
     {
         currentWeapon.Shoot(playerId, fireStart.transform.position, transform.forward);
     }
+
     void Repel()
     {
         RaycastHit[] hits = Physics.SphereCastAll(transform.position + transform.forward * repelRadius, repelRadius, transform.forward);

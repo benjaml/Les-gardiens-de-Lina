@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Gun : AbstractWeapon {
+
     
     public override void Init()
     {
@@ -11,8 +12,10 @@ public class Gun : AbstractWeapon {
         dispersion = 0.2f;
         sound = Resources.Load<AudioClip>("Sound/Gun2");
         bullet = Resources.Load<GameObject>("Prefab/Bullet/GunBullet");
-        base.Init();
+
+        base.Init(); 
     }
+    
 
     public override void GiveTo(Player player)
     {

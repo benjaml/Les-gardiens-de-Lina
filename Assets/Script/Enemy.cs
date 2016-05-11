@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 
-public class Enemy : MonoBehaviour,IDestroyable {
+public class Enemy : MonoBehaviour, IDestroyable
+{
 
     public float speed;
     public float health;
@@ -10,30 +10,31 @@ public class Enemy : MonoBehaviour,IDestroyable {
     public float damage;
     public float explosionDamage;
     public float explosionForcePerSize;
-    
+
     public GameObject[] targets;
     public GameObject target;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         targets = GameObject.FindGameObjectsWithTag("Player");
         target = GetClosest();
         InvokeRepeating("GetClosest", 0f, 1f);
-	}
+    }
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position,target.transform.position,speed*Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
     }
 
     GameObject GetClosest()
     {
         GameObject ret = null;
         float dist = Mathf.Infinity;
-        foreach(GameObject obj in targets)
+        foreach (GameObject obj in targets)
         {
             float tmp = Vector3.Distance(transform.position, obj.transform.position);
-            if(tmp < dist)
+            if (tmp < dist)
             {
                 dist = tmp;
                 ret = obj;
@@ -44,10 +45,10 @@ public class Enemy : MonoBehaviour,IDestroyable {
 
     void OnCollisionEnter(Collision col)
     {
-        if(col.transform.tag == "Enemy")
+        if (col.transform.tag == "Enemy")
         {
             Enemy other = col.transform.GetComponent<Enemy>();
-            if(other == null)
+            if (other == null)
             {
                 return;
             }
@@ -60,7 +61,7 @@ public class Enemy : MonoBehaviour,IDestroyable {
                 Destroy(col.transform.gameObject);
             }
         }
-        else if(col.transform.tag == "Player")
+        else if (col.transform.tag == "Player")
         {
             Death();
         }
@@ -70,7 +71,7 @@ public class Enemy : MonoBehaviour,IDestroyable {
     {
         health += enemy.size;
         size += enemy.size;
-        transform.localScale = Vector3.one * (1+size/4);
+        transform.localScale = Vector3.one * (1 + size / 4);
         damage += enemy.damage;
         explosionDamage += enemy.explosionDamage;
         Destroy(enemy.gameObject);
@@ -96,10 +97,12 @@ public class Enemy : MonoBehaviour,IDestroyable {
 
     void Explode()
     {
+        ScreenShakeManager.Inst.Shake(( size / 4f));
+
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, (1 + size / 2f), Vector3.up);
-        foreach(RaycastHit hit in hits)
+        foreach (RaycastHit hit in hits)
         {
-            if(hit.transform.gameObject != gameObject)
+            if (hit.transform.gameObject != gameObject)
             {
                 if (hit.transform.GetComponent(typeof(IDestroyable)))
                 {
@@ -108,7 +111,7 @@ public class Enemy : MonoBehaviour,IDestroyable {
                     target.applyDamage(damage);
                     Vector3 knockbackForce = hit.transform.position - transform.position;
                     knockbackForce.Normalize();
-                    knockbackForce *= (1+size/4f) * explosionForcePerSize;
+                    knockbackForce *= (1 + size / 4f) * explosionForcePerSize;
                     hit.transform.GetComponent<Rigidbody>().AddForce(knockbackForce);
                 }
             }
