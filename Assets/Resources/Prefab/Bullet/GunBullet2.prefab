@@ -13,7 +13,7 @@ GameObject:
   - 23: {fileID: 2318134}
   - 114: {fileID: 11434602}
   m_Layer: 0
-  m_Name: GunBullet
+  m_Name: GunBullet2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,8 +26,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109532}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.171535, y: 1.1920791, z: 3.3787012}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: -6.171535, y: 1.332, z: 3.3787012}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -41,7 +41,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 033f5718a9ee47f47bb426bf8c73a147, type: 2}
+  - {fileID: 2100000, guid: a5a56589a6d0fce40918dfca08b63e5b, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -63,7 +63,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109532}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 33c300d29515cce42afac55d290479cf, type: 3}
 --- !u!114 &11434602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -90,8 +90,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.2
+  m_Center: {x: -0, y: 0, z: 0.18}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

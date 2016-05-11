@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour, IDestroyable
 {
@@ -10,21 +11,24 @@ public class Enemy : MonoBehaviour, IDestroyable
     public float damage;
     public float explosionDamage;
     public float explosionForcePerSize;
+    public GameObject dangerZone;
 
-    public GameObject[] targets;
+    public List<GameObject> targets = new List<GameObject>();
     public GameObject target;
 
     // Use this for initialization
     void Start()
     {
-        targets = GameObject.FindGameObjectsWithTag("Player");
-        target = GetClosest();
-        InvokeRepeating("GetClosest", 0f, 1f);
+        foreach(GameObject obj in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            targets.Add(obj);
+        }
+        dangerZone.transform.localScale = Vector3.one * (4 * (1 + size / 2f));
     }
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, GetClosest().transform.position, speed * Time.deltaTime);
     }
 
     GameObject GetClosest()
@@ -33,6 +37,8 @@ public class Enemy : MonoBehaviour, IDestroyable
         float dist = Mathf.Infinity;
         foreach (GameObject obj in targets)
         {
+            if (obj == null)
+                continue;
             float tmp = Vector3.Distance(transform.position, obj.transform.position);
             if (tmp < dist)
             {
@@ -74,6 +80,7 @@ public class Enemy : MonoBehaviour, IDestroyable
         transform.localScale = Vector3.one * (1 + size / 4);
         damage += enemy.damage;
         explosionDamage += enemy.explosionDamage;
+        dangerZone.transform.localScale = Vector3.one * (4 * (1 + size / 2f));
         Destroy(enemy.gameObject);
     }
 
@@ -86,6 +93,8 @@ public class Enemy : MonoBehaviour, IDestroyable
             GetComponent<BoxCollider>().enabled = false;
             Destroy(GetComponent<Rigidbody>());
             Invoke("Death", 0.2f);
+            dangerZone.SetActive(true);
+
         }
     }
 
@@ -93,6 +102,12 @@ public class Enemy : MonoBehaviour, IDestroyable
     {
         Explode();
         Destroy(gameObject);
+    }
+
+    public void ResetEnemyList(GameObject doNotTake)
+    {
+        targets.Remove(doNotTake);
+        GetClosest();
     }
 
     void Explode()

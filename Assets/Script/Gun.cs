@@ -11,7 +11,7 @@ public class Gun : AbstractWeapon {
         fireRate = 0.1f;
         dispersion = 0.2f;
         sound = Resources.Load<AudioClip>("Sound/Gun2");
-        bullet = Resources.Load<GameObject>("Prefab/Bullet/GunBullet");
+        bullet = Resources.Load<GameObject>("Prefab/Bullet/GunBullet"+GetComponent<Player>().playerId);
 
         base.Init(); 
     }

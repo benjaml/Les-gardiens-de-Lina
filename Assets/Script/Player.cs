@@ -16,12 +16,12 @@ public class Player : MonoBehaviour, IDestroyable{
     public float repelRadius;
     public float repelDelay;
     public float repelForce;
-    public Light fireLight;
 
     public ParticleSystem particleGenerator;
+    public GameObject muzzle;
 
 
-    
+
     bool invincible = false;
     bool shooting = false;
     bool repel = false;
@@ -33,7 +33,6 @@ public class Player : MonoBehaviour, IDestroyable{
         Gun gun = gameObject.AddComponent<Gun>();
         gun.AttachTo(gameObject,typeof(Gun));
         healthPoint = maxHealthPoint;
-        fireLight = fireStart.GetComponent<Light>();
     }
 
     // Update is called once per frame
@@ -110,8 +109,8 @@ public class Player : MonoBehaviour, IDestroyable{
         direction.y = 0f;
         direction.Normalize();
         currentWeapon.Shoot(playerId, fireStart.transform.position, direction);
-        fireLight.enabled = true;
         Invoke("StopLight", 0.1f);
+        muzzle.SetActive(true);
 
     }
 
@@ -141,6 +140,10 @@ public class Player : MonoBehaviour, IDestroyable{
 
     public void Death()
     {
+        foreach(GameObject obj in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            obj.GetComponent<Enemy>().ResetEnemyList(gameObject);
+        }
         Destroy(gameObject);
     }
 
@@ -151,7 +154,7 @@ public class Player : MonoBehaviour, IDestroyable{
     
     void StopLight()
     {
-        fireLight.enabled = false;
+        muzzle.SetActive(false);
     }
     
 }
