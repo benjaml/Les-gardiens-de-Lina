@@ -20,6 +20,9 @@ public class EnemySpawner : MonoBehaviour {
     void Spawn()
     {
         if (numberToSpawn > 0)
+        {
             Instantiate(EnemyPrefab, transform.position, Quaternion.identity);
+            numberToSpawn--;
+        }
     }
 }

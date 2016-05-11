@@ -21,7 +21,7 @@ public class bullet : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        if(col.GetComponent(typeof(IDestroyable)))
+        if(col.GetComponent(typeof(IDestroyable)) && col.transform.tag != "Player")
         {
             IDestroyable target = col.GetComponent(typeof(IDestroyable)) as IDestroyable;
             target.applyDamage(damage);

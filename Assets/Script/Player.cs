@@ -16,6 +16,7 @@ public class Player : MonoBehaviour, IDestroyable{
     public float repelRadius;
     public float repelDelay;
     public float repelForce;
+    public Light fireLight;
 
    
 
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour, IDestroyable{
         Gun gun = gameObject.AddComponent<Gun>();
         gun.AttachTo(gameObject,typeof(Gun));
         healthPoint = maxHealthPoint;
+        fireLight = fireStart.GetComponent<Light>();
     }
 
     // Update is called once per frame
@@ -104,12 +106,18 @@ public class Player : MonoBehaviour, IDestroyable{
         direction.y = 0f;
         direction.Normalize();
         currentWeapon.Shoot(playerId, fireStart.transform.position, direction);
+        fireLight.enabled = true;
+        Invoke("StopLight", 0.1f);
+
     }
 
     void Repel()
     {
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position + transform.forward * repelRadius, repelRadius, transform.forward);
-        foreach(RaycastHit hit in hits)
+        Vector3 direction = fireStart.transform.position - transform.position;
+        direction.y = 0f;
+        direction.Normalize();
+        Collider[] hits = Physics.OverlapSphere(transform.position + direction * repelRadius, repelRadius);
+        foreach(Collider hit in hits)
         {
             if(hit.transform.gameObject != gameObject)
             {
@@ -134,6 +142,11 @@ public class Player : MonoBehaviour, IDestroyable{
     void ResetInvincibility()
     {
         invincible = false;
+    }
+    
+    void StopLight()
+    {
+        fireLight.enabled = false;
     }
     
 }
