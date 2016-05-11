@@ -5,7 +5,8 @@ public class EnemySpawner : MonoBehaviour {
 
     public float numberToSpawn;
     public float spawnDelay;
-    public GameObject EnemyPrefab;
+    public GameObject[] EnemyPrefab;
+    public float spawnRadius;
 
 	// Use this for initialization
 	void Start () {
@@ -21,7 +22,11 @@ public class EnemySpawner : MonoBehaviour {
     {
         if (numberToSpawn > 0)
         {
-            Instantiate(EnemyPrefab, transform.position, Quaternion.identity);
+            GameObject tmp = EnemyPrefab[Random.Range(0, EnemyPrefab.Length)];
+            Vector3 spawnPosition = transform.position;
+            spawnPosition += Vector3.right * Random.Range(-spawnRadius, spawnRadius);
+            spawnPosition += Vector3.forward * Random.Range(-spawnRadius, spawnRadius);
+            Instantiate(tmp, spawnPosition, Quaternion.identity);
             numberToSpawn--;
         }
     }

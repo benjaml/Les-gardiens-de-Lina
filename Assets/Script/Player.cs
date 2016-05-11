@@ -18,13 +18,15 @@ public class Player : MonoBehaviour, IDestroyable{
     public float repelForce;
     public Light fireLight;
 
-   
+    public ParticleSystem particleGenerator;
 
 
     
     bool invincible = false;
     bool shooting = false;
     bool repel = false;
+    float shootStart;
+    float repelStart;
 
     void Awake()
     {
@@ -37,7 +39,7 @@ public class Player : MonoBehaviour, IDestroyable{
     // Update is called once per frame
 	void Update () {
 
-        if (XInput.instance.getTriggerRight(playerId)>0.5f && !shooting)
+        if (XInput.instance.getTriggerRight(playerId)>0.5f && !shooting && Time.time > shootStart + currentWeapon.fireRate)
         {
             InvokeRepeating("Shoot",0f,currentWeapon.fireRate);
             shooting = true;
@@ -48,7 +50,7 @@ public class Player : MonoBehaviour, IDestroyable{
             shooting = false;
         }
 
-        if (XInput.instance.getTriggerLeft(playerId) > 0.5f && !repel)
+        if (XInput.instance.getTriggerLeft(playerId) > 0.5f && !repel && Time.time>repelStart+repelDelay)
         {
             InvokeRepeating("Repel", 0f, repelDelay);
             repel = true;
@@ -102,6 +104,8 @@ public class Player : MonoBehaviour, IDestroyable{
 
     void Shoot()
     {
+        shootStart = Time.time;
+        particleGenerator.Emit(1);
         Vector3 direction = fireStart.transform.position - transform.position;
         direction.y = 0f;
         direction.Normalize();
@@ -113,6 +117,7 @@ public class Player : MonoBehaviour, IDestroyable{
 
     void Repel()
     {
+        repelStart = Time.time;
         Vector3 direction = fireStart.transform.position - transform.position;
         direction.y = 0f;
         direction.Normalize();
