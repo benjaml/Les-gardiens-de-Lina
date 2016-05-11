@@ -13,6 +13,7 @@ public class Player : MonoBehaviour, IDestroyable{
     public float healthPoint;
     public float maxHealthPoint;
 
+    public ParticleSystem particleEmitter;
 
 
     Animator anim;
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour, IDestroyable{
         gun.AttachTo(gameObject,typeof(Gun));
         healthPoint = maxHealthPoint;
         anim = GetComponentInChildren<Animator>();
+        
     }
 
     
@@ -89,6 +91,7 @@ public class Player : MonoBehaviour, IDestroyable{
 
     void Shoot()
     {
+        particleEmitter.Emit(1);
         currentWeapon.Shoot(playerId, fireStart.transform.position, transform.forward);
     }
 
