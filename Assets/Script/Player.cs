@@ -25,8 +25,7 @@ public class Player : MonoBehaviour, IDestroyable{
 
 
     public int bulletFired;
-
-    public Text text;
+    
 
     public Image life;
 
@@ -119,7 +118,6 @@ public class Player : MonoBehaviour, IDestroyable{
         shootStart = Time.time;
         particleGenerator.Emit(1);
         bulletFired++;
-        text.text = "BULLET FIRED " + bulletFired.ToString();
         Vector3 direction = fireStart.transform.position - transform.position;
         direction.y = 0f;
         direction.Normalize();
