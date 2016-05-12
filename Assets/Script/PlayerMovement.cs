@@ -38,6 +38,5 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 relativePos = head.transform.position + new Vector3(hLook, 0.0f, vLook) * -1f - head.transform.position;
         head.transform.rotation = Quaternion.Slerp(head.transform.rotation, Quaternion.LookRotation(relativePos), rotationSpeed * Time.deltaTime);
         tank.transform.rotation = Quaternion.Slerp(tank.transform.rotation, Quaternion.LookRotation(relativePos), rotationSpeed/2f * Time.deltaTime);
-        //head.transform.LookAt(head.transform.position+new Vector3(h, 0.0f, v)*-1f);
     }
 }

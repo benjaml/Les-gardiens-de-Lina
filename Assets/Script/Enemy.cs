@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour, IDestroyable
     public GameObject target;
     float rotationSpeed;
     public float rotationSpeedMax;
+    public GameObject explosion;
 
     void Awake()
     {
@@ -106,7 +107,7 @@ public class Enemy : MonoBehaviour, IDestroyable
             speed = 0f;
             GetComponent<SphereCollider>().enabled = false;
             Destroy(GetComponent<Rigidbody>());
-            Invoke("Death", 1f);
+            Invoke("Death", 0.2f);
             transform.DOShakePosition(1f, 0.5f,50,80f,false);
             transform.DOShakeRotation(1f, 0.1f,5,80f);
             dangerZone.SetActive(true);
@@ -131,7 +132,11 @@ public class Enemy : MonoBehaviour, IDestroyable
     void Explode()
     {
         ScreenShakeManager.Inst.Shake(( size / 4f));
-
+        GameObject instance = Instantiate(explosion, transform.position, explosion.transform.rotation) as GameObject;
+        instance.transform.localScale *= transform.localScale.magnitude;
+        instance.transform.GetChild(0).GetChild(0).localScale *= transform.localScale.magnitude;
+        Destroy(instance, 1.1f);
+        
         Collider[] hits = Physics.OverlapSphere(transform.position, transform.localScale.magnitude);
         
         foreach (Collider hit in hits)

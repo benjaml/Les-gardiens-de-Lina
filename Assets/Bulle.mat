@@ -6,11 +6,11 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: 01 - Default
-  m_Shader: {fileID: 4800000, guid: 46b5b1f3804919241832cdcd53b644e3, type: 3}
+  m_Name: Bulle
+  m_Shader: {fileID: 4800000, guid: 3f346b192590ab94193ee2651b24dc56, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 5
-  m_CustomRenderQueue: 2000
+  m_LightmapFlags: 0
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 4e7f5e69d138b384a8a4d6c23e7ce731, type: 3}
+          m_Texture: {fileID: 2800000, guid: 1cd25597de5adae4483580e6e013c552, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -100,6 +100,10 @@ Material:
         second: 0.5
       data:
         first:
+          name: PixelSnap
+        second: 0
+      data:
+        first:
           name: _Parallax
         second: 0.02
       data:
@@ -109,7 +113,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: 0
+        second: 0.5
       data:
         first:
           name: _BumpScale
@@ -134,10 +138,6 @@ Material:
         first:
           name: _Metallic
         second: 0
-      data:
-        first:
-          name: _Divisions
-        second: 0.5639098
     m_Colors:
       data:
         first:

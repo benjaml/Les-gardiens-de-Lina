@@ -21,6 +21,7 @@ public class Player : MonoBehaviour, IDestroyable{
 
     public ParticleSystem particleGenerator;
     public GameObject muzzle;
+    public GameObject shockwave;
 
 
     public int bulletFired;
@@ -130,14 +131,19 @@ public class Player : MonoBehaviour, IDestroyable{
 
     void Repel()
     {
-        repelStart = Time.time;
         Vector3 direction = fireStart.transform.position - transform.position;
+        direction.y = 0f;
+        direction.Normalize();
+        GameObject instance = Instantiate(shockwave, fireStart.transform.position, Quaternion.LookRotation(direction)) as GameObject;
+        Destroy(instance, 1f);
+        repelStart = Time.time;
+        direction = fireStart.transform.position - transform.position;
         direction.y = 0f;
         direction.Normalize();
         Collider[] hits = Physics.OverlapSphere(transform.position + direction * repelRadius, repelRadius);
         foreach(Collider hit in hits)
         {
-            if(hit.transform.gameObject != gameObject)
+            if(hit.transform.gameObject != gameObject && hit.transform.tag != "Player")
             {
                 // add force on forward direction
                 if(hit.transform.GetComponent<Rigidbody>())

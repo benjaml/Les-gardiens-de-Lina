@@ -981,7 +981,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 198166}
-  m_LocalRotation: {x: 0.013568184, y: 0.66558754, z: -0.6643733, w: 0.33973143}
+  m_LocalRotation: {x: 0.013568183, y: 0.66558754, z: -0.6643733, w: 0.33973143}
   m_LocalPosition: {x: 0.22409861, y: 0.13054395, z: 0.13909921}
   m_LocalScale: {x: 1.0000001, y: 0.9999999, z: 0.99999994}
   m_Children:
@@ -1800,7 +1800,8 @@ MonoBehaviour:
   dangerZone: {fileID: 142164}
   targets: []
   target: {fileID: 0}
-  rotationSpeedMax: 0
+  rotationSpeedMax: 100
+  explosion: {fileID: 109994, guid: 70d69ce000832884a960ca9210807980, type: 2}
 --- !u!135 &13582430
 SphereCollider:
   m_ObjectHideFlags: 1
