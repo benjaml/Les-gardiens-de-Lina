@@ -38,19 +38,19 @@ public class EnemyManager : MonoBehaviour {
 
         if (totalCount > 50)
         {
-            spawners[0].SetActive(true);
+            spawners[1].SetActive(true);
         }
         if (totalCount > 100)
         {
-            spawners[4].SetActive(true);
+            spawners[5].SetActive(true);
         }
         if (totalCount > 200)
         {
-            spawners[2].SetActive(true);
+            spawners[3].SetActive(true);
         }
         if (totalCount > 350)
         {
-            spawners[6].SetActive(true);
+            spawners[7].SetActive(true);
         }
 
     }

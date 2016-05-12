@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour, IDestroyable
     float rotationSpeed;
     public float rotationSpeedMax;
     public GameObject explosion;
+    bool killedByPlayer = false;
 
     void Awake()
     {
@@ -45,7 +46,10 @@ public class Enemy : MonoBehaviour, IDestroyable
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, GetClosest().transform.position, speed * Time.deltaTime);
+        GameObject cible = GetClosest();
+        if (cible == null)
+            return;
+        transform.position = Vector3.MoveTowards(transform.position, cible.transform.position, speed * Time.deltaTime);
         transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
 
     }
@@ -103,12 +107,15 @@ public class Enemy : MonoBehaviour, IDestroyable
     public void applyDamage(float damage, int killerID = -1)
     {
         health -= damage;
+        transform.DOPunchScale(Vector3.one * -0.1f*size, 0.1f, 5, 0.1f);
         if (health <= 0f)
         {
             speed = 0f;
             GetComponent<SphereCollider>().enabled = false;
             Destroy(GetComponent<Rigidbody>());
             Invoke("Death", 0.2f);
+            if(killerID!=-1)
+                killedByPlayer = true;
             transform.DOShakePosition(1f, 0.5f,50,80f,false);
             transform.DOShakeRotation(1f, 0.1f,5,80f);
             dangerZone.SetActive(true);
@@ -119,6 +126,8 @@ public class Enemy : MonoBehaviour, IDestroyable
     public void Death()
     {
         Explode();
+        if(killedByPlayer)
+            Score.Inst.AddPoint((int)size);
         EnemyManager.Instance.enemies.Remove(gameObject);
         Destroy(gameObject);
     }
@@ -147,7 +156,10 @@ public class Enemy : MonoBehaviour, IDestroyable
                 {
                     IDestroyable target = hit.transform.GetComponent(typeof(IDestroyable)) as IDestroyable;
 
-                    target.applyDamage(damage);
+                    if (killedByPlayer)
+                        target.applyDamage(damage, 1);
+                    else
+                        target.applyDamage(damage);
                     Vector3 knockbackForce = hit.transform.position - transform.position;
                     knockbackForce.Normalize();
                     knockbackForce *= (1 + size / 4f) * explosionForcePerSize;

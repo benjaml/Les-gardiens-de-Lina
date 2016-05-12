@@ -1,0 +1,213 @@
+fileFormatVersion: 2
+guid: 23f3d73eb1e64184d8d0efd39d49d676
+timeCreated: 1463087170
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: T_combp_0
+    21300002: T_combp_1
+    21300004: T_combp_2
+    21300006: T_combp_3
+    21300008: T_combp_4
+    21300010: T_combp_5
+    21300012: T_combp_6
+    21300014: T_combp_7
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: T_combp_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 106
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 40, y: 35}
+        - {x: 36, y: 42}
+        - {x: -41, y: 42}
+        - {x: -41, y: -40}
+        - {x: 37, y: -40}
+        - {x: 40, y: -37}
+    - name: T_combp_1
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 0
+        width: 106
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 37, y: 42}
+        - {x: -41, y: 42}
+        - {x: -41, y: -40}
+        - {x: 36, y: -40}
+        - {x: 40, y: -37}
+        - {x: 40, y: 32}
+    - name: T_combp_2
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 0
+        width: 106
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 17, y: 42}
+        - {x: 12, y: 36}
+        - {x: -5, y: -5}
+        - {x: -5, y: -7}
+        - {x: -5, y: -1}
+        - {x: 1, y: 14}
+        - {x: 3, y: 20}
+        - {x: 3, y: 28}
+        - {x: -1, y: 33}
+        - {x: -32, y: 42}
+        - {x: -41, y: 42}
+        - {x: -41, y: -40}
+        - {x: 42, y: -40}
+        - {x: 42, y: 39}
+        - {x: 35, y: 42}
+    - name: T_combp_3
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 0
+        width: 106
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11, y: 42}
+        - {x: -41, y: 32}
+        - {x: -41, y: -39}
+        - {x: -40, y: -40}
+        - {x: 31, y: -40}
+        - {x: 39, y: -38}
+        - {x: 39, y: 42}
+    - name: T_combp_4
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 0
+        width: 106
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 34, y: 42}
+        - {x: -1, y: 42}
+        - {x: -38, y: 35}
+        - {x: -41, y: 28}
+        - {x: -41, y: -38}
+        - {x: -36, y: -40}
+        - {x: 29, y: -40}
+        - {x: 40, y: -37}
+        - {x: 40, y: 37}
+    - name: T_combp_5
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 0
+        width: 106
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -30, y: 42}
+        - {x: -41, y: 34}
+        - {x: -41, y: -40}
+        - {x: 40, y: -40}
+        - {x: 40, y: 42}
+    - name: T_combp_6
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 0
+        width: 106
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -41, y: 42}
+        - {x: -41, y: -40}
+        - {x: 29, y: -40}
+        - {x: 40, y: -35}
+        - {x: 40, y: 41}
+        - {x: 36, y: 42}
+    - name: T_combp_7
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 0
+        width: 106
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -41, y: 42}
+        - {x: -41, y: -40}
+        - {x: 26, y: -40}
+        - {x: 40, y: -34}
+        - {x: 40, y: 31}
+        - {x: 30, y: 42}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

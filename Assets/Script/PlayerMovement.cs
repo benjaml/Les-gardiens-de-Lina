@@ -34,9 +34,11 @@ public class PlayerMovement : MonoBehaviour {
             vLook = XInput.instance.getYStickRight(playerId);
         if (Mathf.Abs(XInput.instance.getXStickRight(playerId)) > deadZone)
             hLook = XInput.instance.getXStickRight(playerId);
-
-        Vector3 relativePos = head.transform.position + new Vector3(hLook, 0.0f, vLook) * -1f - head.transform.position;
-        head.transform.rotation = Quaternion.Slerp(head.transform.rotation, Quaternion.LookRotation(relativePos), rotationSpeed * Time.deltaTime);
-        tank.transform.rotation = Quaternion.Slerp(tank.transform.rotation, Quaternion.LookRotation(relativePos), rotationSpeed/2f * Time.deltaTime);
+        if(hLook!=0 ||vLook != 0)
+        {
+            Vector3 relativePos = head.transform.position + new Vector3(hLook, 0.0f, vLook) * -1f - head.transform.position;
+            head.transform.rotation = Quaternion.Slerp(head.transform.rotation, Quaternion.LookRotation(relativePos), rotationSpeed * Time.deltaTime);
+            tank.transform.rotation = Quaternion.Slerp(tank.transform.rotation, Quaternion.LookRotation(relativePos), rotationSpeed/2f * Time.deltaTime);
+        }
     }
 }

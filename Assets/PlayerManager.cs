@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
@@ -17,11 +18,15 @@ public class PlayerManager : MonoBehaviour {
     public int bulletCount;
     public int respawnTime;
     public GameObject[] players;
+    public Text[] playerRespawnText;
+    
 
     // Update is called once per frame
     void Update () {
         if (GameObject.FindGameObjectsWithTag("Player").Length == 0)
         {
+            PlayerPrefs.SetInt("Score", Score.Inst.score);
+            PlayerPrefs.SetInt("BulletCount", bulletCount);
             SceneManager.LoadScene("GameOver");
         }
     }
@@ -36,9 +41,10 @@ public class PlayerManager : MonoBehaviour {
     {
         for(int i = respawnTime;i>0;i--)
         {
+            playerRespawnText[PlayerId].text = i.ToString();
             yield return new WaitForSeconds(1f);
-            // update player text Timer
         }
+        playerRespawnText[PlayerId].text = "";
         Instantiate(players[PlayerId]);
         yield return null;
     }

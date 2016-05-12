@@ -24,7 +24,7 @@ public class bullet : MonoBehaviour {
         if(col.GetComponent(typeof(IDestroyable)) && col.transform.tag != "Player")
         {
             IDestroyable target = col.GetComponent(typeof(IDestroyable)) as IDestroyable;
-            target.applyDamage(damage);
+            target.applyDamage(damage,shooterId);
             Vector3 knockback = transform.forward;
             knockback *= knockBackForce;
             col.GetComponent<Rigidbody>().AddForce(knockback);

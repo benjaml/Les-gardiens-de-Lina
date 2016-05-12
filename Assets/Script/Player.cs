@@ -85,7 +85,7 @@ public class Player : MonoBehaviour, IDestroyable{
         XInput.instance.useVibe(playerId-1, currentWeapon.fireRate, 0.12f, 0.12f);
         shootStart = Time.time;
         particleGenerator.Emit(1);
-        bulletFired++;
+        PlayerManager.instance.bulletCount++;
         Vector3 direction = fireStart.transform.position - transform.position;
         direction.y = 0f;
         direction.Normalize();
@@ -116,7 +116,7 @@ public class Player : MonoBehaviour, IDestroyable{
                 {
                     Vector3 force = hit.transform.position - transform.position;
                     force.Normalize();
-                    force *= repelForce;
+                    force *= repelForce*hit.GetComponent<Enemy>().size;
                     hit.transform.GetComponent<Rigidbody>().AddForce(force);
                 }
             }
