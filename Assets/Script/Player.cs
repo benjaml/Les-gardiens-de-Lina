@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.UI;
+
 
 public class Player : MonoBehaviour, IDestroyable{
 
@@ -19,6 +21,12 @@ public class Player : MonoBehaviour, IDestroyable{
     public Light fireLight;
 
     public ParticleSystem particleGenerator;
+
+    public int bulletFired;
+
+    public Text text;
+
+    public Image life;
 
 
     
@@ -60,6 +68,9 @@ public class Player : MonoBehaviour, IDestroyable{
             CancelInvoke("Repel");
             repel = false;
         }
+
+
+        Health();
     }
 
     public void ChangeGun(EnumerationGun.GunType typeOfGun)
@@ -106,6 +117,8 @@ public class Player : MonoBehaviour, IDestroyable{
     {
         shootStart = Time.time;
         particleGenerator.Emit(1);
+        bulletFired++;
+        text.text = "BULLET FIRED " + bulletFired.ToString();
         Vector3 direction = fireStart.transform.position - transform.position;
         direction.y = 0f;
         direction.Normalize();
@@ -152,6 +165,11 @@ public class Player : MonoBehaviour, IDestroyable{
     void StopLight()
     {
         fireLight.enabled = false;
+    }
+
+    void Health()
+    {
+        life.fillAmount = 0f + ((100f / maxHealthPoint * healthPoint) / 100f);
     }
     
 }

@@ -114,7 +114,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberToSpawn: 100000
   spawnDelay: 2
-  EnemyPrefab: {fileID: 167608, guid: 87542e34277e22c47aeed27f3fb94b26, type: 2}
+  EnemyPrefab:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnRadius: 0
 --- !u!4 &25345452
 Transform:
   m_ObjectHideFlags: 0
@@ -1106,7 +1110,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  rotationSpeed: 0
   deadZone: 0.3
+  head: {fileID: 0}
+  tank: {fileID: 0}
 --- !u!4 &738793769
 Transform:
   m_ObjectHideFlags: 0
@@ -1139,6 +1146,8 @@ MonoBehaviour:
   repelRadius: 5
   repelDelay: 3
   repelForce: 1000
+  fireLight: {fileID: 0}
+  particleGenerator: {fileID: 0}
 --- !u!82 &738793771
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1201,7 +1210,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -2478,7 +2487,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberToSpawn: 100000
   spawnDelay: 2
-  EnemyPrefab: {fileID: 167608, guid: 87542e34277e22c47aeed27f3fb94b26, type: 2}
+  EnemyPrefab:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnRadius: 0
 --- !u!4 &1659419166
 Transform:
   m_ObjectHideFlags: 0
@@ -2570,7 +2583,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberToSpawn: 100000
   spawnDelay: 2
-  EnemyPrefab: {fileID: 167608, guid: 87542e34277e22c47aeed27f3fb94b26, type: 2}
+  EnemyPrefab:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnRadius: 0
 --- !u!4 &1676237297
 Transform:
   m_ObjectHideFlags: 0
@@ -2881,7 +2898,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberToSpawn: 100000
   spawnDelay: 2
-  EnemyPrefab: {fileID: 167608, guid: 87542e34277e22c47aeed27f3fb94b26, type: 2}
+  EnemyPrefab:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnRadius: 0
 --- !u!4 &1879408498
 Transform:
   m_ObjectHideFlags: 0

@@ -4,6 +4,8 @@ using System.Collections;
 public class Enemy : MonoBehaviour, IDestroyable
 {
 
+    public bool destructionScore;
+
     public float speed;
     public float health;
     public float size;
@@ -86,9 +88,10 @@ public class Enemy : MonoBehaviour, IDestroyable
             GetComponent<BoxCollider>().enabled = false;
             Destroy(GetComponent<Rigidbody>());
             Invoke("Death", 0.2f);
+            Score.Inst.AddPoint((int)size);
         }
     }
-
+    
     public void Death()
     {
         Explode();
