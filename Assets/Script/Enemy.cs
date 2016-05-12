@@ -19,6 +19,11 @@ public class Enemy : MonoBehaviour, IDestroyable
     float rotationSpeed;
     public float rotationSpeedMax;
 
+    void Awake()
+    {
+        EnemyManager.Instance.enemies.Add(gameObject);
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -73,10 +78,7 @@ public class Enemy : MonoBehaviour, IDestroyable
             if (size >= other.size)
             {
                 Fusion(other);
-                size += other.size;
-                damage += other.damage;
-                explosionDamage += other.explosionDamage;
-                Destroy(col.transform.gameObject);
+                EnemyManager.Instance.enemies.Remove(col.transform.gameObject);
             }
         }
         else if (col.transform.tag == "Player")
@@ -114,6 +116,7 @@ public class Enemy : MonoBehaviour, IDestroyable
     public void Death()
     {
         Explode();
+        EnemyManager.Instance.enemies.Remove(gameObject);
         Destroy(gameObject);
     }
 

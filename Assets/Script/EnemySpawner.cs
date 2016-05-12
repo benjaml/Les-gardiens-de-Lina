@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        InvokeRepeating("Spawn", 0f, spawnDelay);
+        InvokeRepeating("Spawn", Random.Range(0f,spawnDelay), spawnDelay);
     }
 
     void OnDrawGizmosSelected()

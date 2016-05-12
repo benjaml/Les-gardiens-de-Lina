@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ac63484ed08b346ae0b32ea40f4512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberToSpawn: 100000
+  numberToSpawn: 0
   spawnDelay: 1
   EnemyPrefab:
   - {fileID: 167608, guid: 87542e34277e22c47aeed27f3fb94b26, type: 2}
@@ -440,9 +440,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies: []
+  numberAtFirstWave: 10
+  bonusPerWave: 10
   spawners: []
-  timeBetweenWaves: 0
+  timeBetweenWaves: 5
   wave: 0
+  waveInProgress: 0
+  currentWaveCount: 0
+  spawningWait: 0
 --- !u!4 &682955493
 Transform:
   m_ObjectHideFlags: 0
@@ -1100,7 +1105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ac63484ed08b346ae0b32ea40f4512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberToSpawn: 100000
+  numberToSpawn: 0
   spawnDelay: 1
   EnemyPrefab:
   - {fileID: 167608, guid: 87542e34277e22c47aeed27f3fb94b26, type: 2}
@@ -1144,7 +1149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ac63484ed08b346ae0b32ea40f4512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberToSpawn: 100000
+  numberToSpawn: 0
   spawnDelay: 1
   EnemyPrefab:
   - {fileID: 167608, guid: 87542e34277e22c47aeed27f3fb94b26, type: 2}
@@ -1438,7 +1443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ac63484ed08b346ae0b32ea40f4512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberToSpawn: 100000
+  numberToSpawn: 0
   spawnDelay: 1
   EnemyPrefab:
   - {fileID: 167608, guid: 87542e34277e22c47aeed27f3fb94b26, type: 2}
