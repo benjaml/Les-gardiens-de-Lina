@@ -54,7 +54,7 @@ public class Enemy : MonoBehaviour, IDestroyable
     {
         GameObject ret = null;
         float dist = Mathf.Infinity;
-        foreach (GameObject obj in targets)
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Player"))
         {
             if (obj == null)
                 continue;

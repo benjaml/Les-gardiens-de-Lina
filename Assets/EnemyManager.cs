@@ -29,11 +29,6 @@ public class EnemyManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        //spawners = GameObject.FindGameObjectsWithTag("Respawn");
-        spawners[0].gameObject.SetActive(false);
-        spawners[2].SetActive(false);
-        spawners[4].SetActive(false);
-        spawners[6].SetActive(false);
     }
 
     // Update is called once per frame

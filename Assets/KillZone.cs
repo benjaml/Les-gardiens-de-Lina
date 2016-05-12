@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Deadzone : MonoBehaviour {
+public class KillZone : MonoBehaviour
+{
 
-	void OnTriggerEnter(Collider col)
+    void OnTriggerEnter(Collider col)
     {
-        if(col.transform.tag == "Enemy")
+        if (col.transform.tag == "Enemy")
         {
             col.GetComponent<Enemy>().Death();
         }

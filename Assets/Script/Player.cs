@@ -130,6 +130,9 @@ public class Player : MonoBehaviour, IDestroyable{
         {
             obj.GetComponent<Enemy>().ResetEnemyList(gameObject);
         }
+        PlayerManager.instance.RespawnPlayer(playerId);
+        particleGenerator.transform.parent = null;
+        particleGenerator.transform.localScale/=2f;
         Destroy(gameObject);
     }
 
