@@ -981,7 +981,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 198166}
-  m_LocalRotation: {x: 0.013568187, y: 0.6655875, z: -0.6643732, w: 0.3397314}
+  m_LocalRotation: {x: 0.013568184, y: 0.66558754, z: -0.6643733, w: 0.33973143}
   m_LocalPosition: {x: 0.22409861, y: 0.13054395, z: 0.13909921}
   m_LocalScale: {x: 1.0000001, y: 0.9999999, z: 0.99999994}
   m_Children:
@@ -1195,7 +1195,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 115712}
-  m_LocalRotation: {x: 0.17029999, y: 0.72384024, z: -0.6604025, w: 0.10450729}
+  m_LocalRotation: {x: 0.1703, y: 0.7238403, z: -0.66040254, w: 0.1045073}
   m_LocalPosition: {x: 0.26798192, y: -0.030984487, z: 0.11528093}
   m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_Children:
@@ -1234,7 +1234,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142164}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.16, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children: []
   m_Father: {fileID: 452326}
@@ -1424,7 +1424,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 167608}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.475771, y: 0.016000032, z: 0.68}
+  m_LocalPosition: {x: 5.475771, y: 1.17, z: 0.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 433496}
@@ -1800,7 +1800,7 @@ MonoBehaviour:
   dangerZone: {fileID: 142164}
   targets: []
   target: {fileID: 0}
-  rotationSpeedMax: 100
+  rotationSpeedMax: 0
 --- !u!135 &13582430
 SphereCollider:
   m_ObjectHideFlags: 1

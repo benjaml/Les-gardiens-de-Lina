@@ -102,6 +102,7 @@ public class Enemy : MonoBehaviour, IDestroyable
         health -= damage;
         if (health <= 0f)
         {
+            
             speed = 0f;
             GetComponent<SphereCollider>().enabled = false;
             Destroy(GetComponent<Rigidbody>());
@@ -109,6 +110,7 @@ public class Enemy : MonoBehaviour, IDestroyable
             transform.DOShakePosition(1f, 0.5f,50,80f,false);
             transform.DOShakeRotation(1f, 0.1f,5,80f);
             dangerZone.SetActive(true);
+            Score.Inst.AddPoint((int)size);
 
         }
     }
