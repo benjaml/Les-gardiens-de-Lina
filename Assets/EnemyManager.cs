@@ -26,34 +26,36 @@ public class EnemyManager : MonoBehaviour {
     public float totalCount;
     public bool spawningWait = false;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         //spawners = GameObject.FindGameObjectsWithTag("Respawn");
-        spawners[1].gameObject.SetActive(false);
-        spawners[3].SetActive(false);
-        spawners[5].SetActive(false);
-        spawners[7].SetActive(false);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        
+        spawners[0].gameObject.SetActive(false);
+        spawners[2].SetActive(false);
+        spawners[4].SetActive(false);
+        spawners[6].SetActive(false);
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+
+
+        if (totalCount > 50)
+        {
+            spawners[0].SetActive(true);
+        }
         if (totalCount > 100)
         {
-            spawners[1].SetActive(true);
+            spawners[4].SetActive(true);
         }
         if (totalCount > 200)
         {
-            spawners[3].SetActive(true);
+            spawners[2].SetActive(true);
         }
-        if (totalCount > 300)
+        if (totalCount > 350)
         {
-            spawners[5].SetActive(true);
-        }
-        if (totalCount > 400)
-        {
-            spawners[7].SetActive(true);
+            spawners[6].SetActive(true);
         }
 
     }
