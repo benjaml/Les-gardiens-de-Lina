@@ -103,13 +103,14 @@ public class Player : MonoBehaviour, IDestroyable{
 
     void Shoot()
     {
+        XInput.instance.useVibe(playerId-1, currentWeapon.fireRate, 0.12f, 0.12f);
         shootStart = Time.time;
         particleGenerator.Emit(1);
         Vector3 direction = fireStart.transform.position - transform.position;
         direction.y = 0f;
         direction.Normalize();
         currentWeapon.Shoot(playerId, fireStart.transform.position, direction);
-        Invoke("StopLight", 0.1f);
+        Invoke("StopLight", 0.05f);
         muzzle.SetActive(true);
 
     }

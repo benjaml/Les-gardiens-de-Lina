@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 
 public class Enemy : MonoBehaviour, IDestroyable
 {
@@ -15,20 +16,31 @@ public class Enemy : MonoBehaviour, IDestroyable
 
     public List<GameObject> targets = new List<GameObject>();
     public GameObject target;
+    float rotationSpeed;
+    public float rotationSpeedMax;
 
     // Use this for initialization
     void Start()
     {
+        rotationSpeed = Random.Range(-rotationSpeedMax, rotationSpeedMax);
         foreach(GameObject obj in GameObject.FindGameObjectsWithTag("Player"))
         {
             targets.Add(obj);
         }
-        dangerZone.transform.localScale = Vector3.one * (4 * (1 + size / 2f));
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        // Display the explosion radius when selected
+        Gizmos.color = Color.white;
+        Gizmos.DrawSphere(transform.position, transform.localScale.magnitude);
     }
 
     void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, GetClosest().transform.position, speed * Time.deltaTime);
+        transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
+
     }
 
     GameObject GetClosest()
@@ -80,7 +92,6 @@ public class Enemy : MonoBehaviour, IDestroyable
         transform.localScale = Vector3.one * (1 + size / 4);
         damage += enemy.damage;
         explosionDamage += enemy.explosionDamage;
-        dangerZone.transform.localScale = Vector3.one * (4 * (1 + size / 2f));
         Destroy(enemy.gameObject);
     }
 
@@ -90,9 +101,11 @@ public class Enemy : MonoBehaviour, IDestroyable
         if (health <= 0f)
         {
             speed = 0f;
-            GetComponent<BoxCollider>().enabled = false;
+            GetComponent<SphereCollider>().enabled = false;
             Destroy(GetComponent<Rigidbody>());
-            Invoke("Death", 0.2f);
+            Invoke("Death", 1f);
+            transform.DOShakePosition(1f, 0.5f,50,80f,false);
+            transform.DOShakeRotation(1f, 0.1f,5,80f);
             dangerZone.SetActive(true);
 
         }
@@ -114,8 +127,9 @@ public class Enemy : MonoBehaviour, IDestroyable
     {
         ScreenShakeManager.Inst.Shake(( size / 4f));
 
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, (1 + size / 2f), Vector3.up);
-        foreach (RaycastHit hit in hits)
+        Collider[] hits = Physics.OverlapSphere(transform.position, transform.localScale.magnitude);
+        
+        foreach (Collider hit in hits)
         {
             if (hit.transform.gameObject != gameObject)
             {

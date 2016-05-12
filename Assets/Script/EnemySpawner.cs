@@ -1,22 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemySpawner : MonoBehaviour {
+public class EnemySpawner : MonoBehaviour
+{
 
     public float numberToSpawn;
     public float spawnDelay;
     public GameObject[] EnemyPrefab;
     public float spawnRadius;
 
-	// Use this for initialization
-	void Start () {
-        InvokeRepeating("Spawn", 0f,spawnDelay);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    // Use this for initialization
+    void Start()
+    {
+        InvokeRepeating("Spawn", 0f, spawnDelay);
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        // Display the spawn radius when selected
+        Gizmos.color = Color.white;
+        Gizmos.DrawSphere(transform.position, spawnRadius);
+    }
+
+
+    // Update is called once per frame
+
 
     void Spawn()
     {
