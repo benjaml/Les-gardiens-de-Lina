@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour, IDestroyable
     void Awake()
     {
         EnemyManager.Instance.enemies.Add(gameObject);
+        EnemyManager.Instance.totalCount++;
     }
 
     // Use this for initialization
@@ -75,7 +76,7 @@ public class Enemy : MonoBehaviour, IDestroyable
             {
                 return;
             }
-            if (size >= other.size)
+            if (size >= other.size && size < 4f)
             {
                 Fusion(other);
                 EnemyManager.Instance.enemies.Remove(col.transform.gameObject);
@@ -89,11 +90,12 @@ public class Enemy : MonoBehaviour, IDestroyable
 
     void Fusion(Enemy enemy)
     {
-        health += enemy.size;
-        size += enemy.size;
-        transform.localScale = Vector3.one * (1 + size / 4);
-        damage += enemy.damage;
-        explosionDamage += enemy.explosionDamage;
+        health += 2f;
+        size += 1f;
+        transform.localScale = Vector3.one * (size);
+        speed -= 0.3f;
+        damage += 1f;
+        explosionDamage += 1f;
         Destroy(enemy.gameObject);
     }
 
@@ -102,7 +104,6 @@ public class Enemy : MonoBehaviour, IDestroyable
         health -= damage;
         if (health <= 0f)
         {
-            
             speed = 0f;
             GetComponent<SphereCollider>().enabled = false;
             Destroy(GetComponent<Rigidbody>());
@@ -110,7 +111,6 @@ public class Enemy : MonoBehaviour, IDestroyable
             transform.DOShakePosition(1f, 0.5f,50,80f,false);
             transform.DOShakeRotation(1f, 0.1f,5,80f);
             dangerZone.SetActive(true);
-            Score.Inst.AddPoint((int)size);
 
         }
     }

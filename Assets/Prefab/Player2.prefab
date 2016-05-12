@@ -201,7 +201,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191374}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.993, y: 0.55, z: -0.72}
+  m_LocalPosition: {x: 2.1692867, y: 0.5, z: -0.68287665}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 469540}
@@ -478,7 +478,7 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191374}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -590,8 +590,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9e9e667efd06340b143098ec4f437d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  rotationSpeed: 5
+  speed: 15
+  rotationSpeed: 10
   deadZone: 0.1
   head: {fileID: 170670}
   tank: {fileID: 108976}
@@ -612,8 +612,8 @@ MonoBehaviour:
   healthPoint: 10
   maxHealthPoint: 10
   repelRadius: 5
-  repelDelay: 3
-  repelForce: 1000
+  repelDelay: 1
+  repelForce: 1500
   particleGenerator: {fileID: 19891402}
   muzzle: {fileID: 165300}
 --- !u!136 &13619712

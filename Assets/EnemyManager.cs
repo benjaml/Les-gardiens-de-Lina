@@ -23,47 +23,38 @@ public class EnemyManager : MonoBehaviour {
     public int wave = 0;
     public bool waveInProgress = false;
     public float currentWaveCount;
+    public float totalCount;
     public bool spawningWait = false;
 
 	// Use this for initialization
 	void Start () {
-        spawners = GameObject.FindGameObjectsWithTag("Respawn");
-        StartNewWave();
+        //spawners = GameObject.FindGameObjectsWithTag("Respawn");
+        spawners[1].gameObject.SetActive(false);
+        spawners[3].SetActive(false);
+        spawners[5].SetActive(false);
+        spawners[7].SetActive(false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (enemies.Count > 0 && spawningWait)
-            spawningWait = false;
+        
 
-        if (enemies.Count == 0 && waveInProgress && !spawningWait)
+        if (totalCount > 100)
         {
-            waveInProgress = false;
+            spawners[1].SetActive(true);
         }
-        if (enemies.Count == 0 && !waveInProgress)
+        if (totalCount > 200)
         {
-            StartCoroutine("StartNewWave");
+            spawners[3].SetActive(true);
         }
-    }
-    IEnumerator StartNewWave()
-    {
-        waveInProgress = true;
-        spawningWait = true;
-        yield return new WaitForSeconds(timeBetweenWaves);
-        currentWaveCount = numberAtFirstWave + (bonusPerWave * wave);
-        wave++;
-        if(currentWaveCount > spawners.Length)
+        if (totalCount > 300)
         {
-            float monsterPerSpawner = (int)currentWaveCount / spawners.Length;
-            foreach (GameObject spawn in spawners)
-            {
+            spawners[5].SetActive(true);
+        }
+        if (totalCount > 400)
+        {
+            spawners[7].SetActive(true);
+        }
 
-                spawn.GetComponent<EnemySpawner>().numberToSpawn = monsterPerSpawner;
-                currentWaveCount -= monsterPerSpawner;
-            }
-        }
-        for (int i = 0; i < currentWaveCount; ++i)
-            spawners[Random.Range(0, spawners.Length)].GetComponent<EnemySpawner>().numberToSpawn++;
-        yield return null;
     }
 }

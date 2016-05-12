@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-using UnityEngine.UI;
-
 
 public class Player : MonoBehaviour, IDestroyable{
 
@@ -22,12 +20,6 @@ public class Player : MonoBehaviour, IDestroyable{
     public ParticleSystem particleGenerator;
     public GameObject muzzle;
 
-
-    public int bulletFired;
-
-    public Text text;
-
-    public Image life;
 
 
     bool invincible = false;
@@ -67,9 +59,6 @@ public class Player : MonoBehaviour, IDestroyable{
             CancelInvoke("Repel");
             repel = false;
         }
-
-
-        Health();
     }
 
     public void ChangeGun(EnumerationGun.GunType typeOfGun)
@@ -117,8 +106,6 @@ public class Player : MonoBehaviour, IDestroyable{
         XInput.instance.useVibe(playerId-1, currentWeapon.fireRate, 0.12f, 0.12f);
         shootStart = Time.time;
         particleGenerator.Emit(1);
-        bulletFired++;
-        text.text = "BULLET FIRED " + bulletFired.ToString();
         Vector3 direction = fireStart.transform.position - transform.position;
         direction.y = 0f;
         direction.Normalize();
@@ -137,7 +124,7 @@ public class Player : MonoBehaviour, IDestroyable{
         Collider[] hits = Physics.OverlapSphere(transform.position + direction * repelRadius, repelRadius);
         foreach(Collider hit in hits)
         {
-            if(hit.transform.gameObject != gameObject)
+            if(hit.transform.gameObject != gameObject && hit.transform.tag != "Player")
             {
                 // add force on forward direction
                 if(hit.transform.GetComponent<Rigidbody>())
@@ -169,11 +156,6 @@ public class Player : MonoBehaviour, IDestroyable{
     void StopLight()
     {
         muzzle.SetActive(false);
-    }
-
-    void Health()
-    {
-        life.fillAmount = 0f + ((100f / maxHealthPoint * healthPoint) / 100f);
     }
     
 }

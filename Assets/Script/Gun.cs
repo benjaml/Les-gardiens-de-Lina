@@ -7,9 +7,9 @@ public class Gun : AbstractWeapon {
     public override void Init()
     {
         type = EnumerationGun.GunType.GUN;
-        damage = 1.0f;
+        damage = 0.5f;
         fireRate = 0.1f;
-        dispersion = 0.2f;
+        dispersion = 0.1f;
         sound = Resources.Load<AudioClip>("Sound/Gun2");
         bullet = Resources.Load<GameObject>("Prefab/Bullet/GunBullet"+GetComponent<Player>().playerId);
 
