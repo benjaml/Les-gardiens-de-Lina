@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour {
     public int respawnTime;
     public GameObject[] players;
     public Text[] playerRespawnText;
+    public GameObject GameOverUI;
     
 
     // Update is called once per frame
@@ -27,7 +28,13 @@ public class PlayerManager : MonoBehaviour {
         {
             PlayerPrefs.SetInt("Score", Score.Inst.score);
             PlayerPrefs.SetInt("BulletCount", bulletCount);
-            SceneManager.LoadScene("GameOver");
+            EnemyManager.Instance.StopSpawn();
+            StopAllCoroutines();
+            if(GameObject.FindGameObjectWithTag("UI"))
+                GameObject.FindGameObjectWithTag("UI").SetActive(false);
+            Instantiate(GameOverUI);
+            Destroy(this);
+            //SceneManager.LoadScene("GameOver");
         }
     }
 
@@ -45,7 +52,8 @@ public class PlayerManager : MonoBehaviour {
             yield return new WaitForSeconds(1f);
         }
         playerRespawnText[PlayerId].text = "";
-        Instantiate(players[PlayerId]);
+        if(GameObject.Find("Player"+(PlayerId+1))== null)
+            Instantiate(players[PlayerId]);
         yield return null;
     }
 }

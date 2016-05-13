@@ -42,9 +42,16 @@ public class Player : MonoBehaviour, IDestroyable{
         gun.AttachTo(gameObject,typeof(Gun));
         healthPoint = maxHealthPoint;
     }
+    void OnDrawGizmosSelected()
+    {
+        // Display the explosion radius when selected
+        Gizmos.color = Color.white;
+
+        Gizmos.DrawSphere(transform.position - transform.GetChild(0).forward * repelRadius, repelRadius);
+    }
 
     // Update is called once per frame
-	void Update () {
+    void Update () {
 
         if (XInput.instance.getTriggerRight(playerId)>0.5f && !shooting && Time.time > shootStart + currentWeapon.fireRate)
         {
@@ -103,10 +110,7 @@ public class Player : MonoBehaviour, IDestroyable{
         GameObject instance = Instantiate(shockwave, fireStart.transform.position, Quaternion.LookRotation(direction)) as GameObject;
         Destroy(instance, 1f);
         repelStart = Time.time;
-        direction = fireStart.transform.position - transform.position;
-        direction.y = 0f;
-        direction.Normalize();
-        Collider[] hits = Physics.OverlapSphere(transform.position + direction * repelRadius, repelRadius);
+        Collider[] hits = Physics.OverlapSphere(transform.position - transform.GetChild(0).forward * repelRadius, repelRadius);
         foreach(Collider hit in hits)
         {
             if(hit.transform.gameObject != gameObject && hit.transform.tag != "Player")
@@ -114,10 +118,12 @@ public class Player : MonoBehaviour, IDestroyable{
                 // add force on forward direction
                 if(hit.transform.GetComponent<Rigidbody>())
                 {
-                    Vector3 force = hit.transform.position - transform.position;
+                    Vector3 force = -transform.GetChild(0).forward;
+                    force.y = 0f;
                     force.Normalize();
                     force *= repelForce*hit.GetComponent<Enemy>().size;
                     hit.transform.GetComponent<Rigidbody>().AddForce(force);
+                    hit.transform.GetComponent<Enemy>().Knockup();
                 }
             }
         }

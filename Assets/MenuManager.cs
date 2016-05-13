@@ -17,7 +17,17 @@ public class MenuManager : MonoBehaviour {
 
     public void SetGame()
     {
+        SceneManager.LoadScene("Main");
+    }
+
+    public void SetTuto()
+    {
         SceneManager.LoadScene("Tuto");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 
 

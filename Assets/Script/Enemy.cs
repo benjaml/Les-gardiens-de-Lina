@@ -20,6 +20,11 @@ public class Enemy : MonoBehaviour, IDestroyable
     public float rotationSpeedMax;
     public GameObject explosion;
     bool killedByPlayer = false;
+    bool knockup = false;
+    float knockupLength = 0.2f;
+    float knockupStart = 0f;
+
+    public AudioClip explosionSound;
 
     void Awake()
     {
@@ -43,9 +48,25 @@ public class Enemy : MonoBehaviour, IDestroyable
         Gizmos.color = Color.white;
         Gizmos.DrawSphere(transform.position, transform.localScale.magnitude);
     }
-
+    public void Knockup()
+    {
+        knockupStart = Time.time;
+        knockup = true;
+    }
     void Update()
     {
+        if (knockup)
+        {
+            if (Time.time < knockupStart + knockupLength)
+            {
+                return;
+            }
+            else
+            {
+                knockup = false;        
+            }
+         }
+
         GameObject cible = GetClosest();
         if (cible == null)
             return;
@@ -140,6 +161,14 @@ public class Enemy : MonoBehaviour, IDestroyable
 
     void Explode()
     {
+        GameObject source = new GameObject();
+        AudioSource audio = source.AddComponent<AudioSource>();
+        audio.pitch += Random.Range(-0.1f, 0.4f);
+        audio.clip = explosionSound;
+        audio.loop = false;
+        audio.Play();
+        Destroy(source, 1f);
+
         ScreenShakeManager.Inst.Shake(( size / 4f));
         GameObject instance = Instantiate(explosion, transform.position, explosion.transform.rotation) as GameObject;
         instance.transform.localScale *= transform.localScale.magnitude;

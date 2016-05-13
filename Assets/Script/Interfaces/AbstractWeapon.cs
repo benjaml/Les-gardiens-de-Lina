@@ -25,6 +25,7 @@ public abstract class AbstractWeapon : AbstractPickable {
         posToLook.z += Random.Range(-1f, 1f) * dispersion;
         direction = (posToLook - transform.position).normalized;
         Instantiate(bullet, startPos, Quaternion.LookRotation(direction));
+        GetComponent<AudioSource>().pitch = 1 + Random.Range(-0.1f, 0.4f);
         GetComponent<AudioSource>().PlayOneShot(sound);
     }
 

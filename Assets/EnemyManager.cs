@@ -54,4 +54,12 @@ public class EnemyManager : MonoBehaviour {
         }
 
     }
+    public void StopSpawn()
+    {
+        foreach(GameObject spawn in spawners)
+        {
+            Destroy(spawn);
+        }
+        Destroy(this);
+    }
 }
