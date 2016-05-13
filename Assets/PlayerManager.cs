@@ -13,9 +13,11 @@ public class PlayerManager : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(this);
+        
     }
 
     public int bulletCount;
+    public int enemyKilled;
     public int respawnTime;
     public GameObject[] players;
     public Text[] playerRespawnText;
@@ -26,8 +28,11 @@ public class PlayerManager : MonoBehaviour {
     void Update () {
         if (GameObject.FindGameObjectsWithTag("Player").Length == 0)
         {
+            if (Score.Inst.score > PlayerPrefs.GetInt("Score"))
+                PlayerPrefs.SetInt("Highscore", Score.Inst.score);
             PlayerPrefs.SetInt("Score", Score.Inst.score);
             PlayerPrefs.SetInt("BulletCount", bulletCount);
+            PlayerPrefs.SetInt("EnemyCount", enemyKilled);
             EnemyManager.Instance.StopSpawn();
             StopAllCoroutines();
             if(GameObject.FindGameObjectWithTag("UI"))
@@ -48,7 +53,7 @@ public class PlayerManager : MonoBehaviour {
     {
         for(int i = respawnTime;i>0;i--)
         {
-            playerRespawnText[PlayerId].text = i.ToString();
+            playerRespawnText[PlayerId].text = "Respawn in "+i;
             yield return new WaitForSeconds(1f);
         }
         playerRespawnText[PlayerId].text = "";

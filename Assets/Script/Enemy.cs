@@ -136,7 +136,10 @@ public class Enemy : MonoBehaviour, IDestroyable
             Destroy(GetComponent<Rigidbody>());
             Invoke("Death", 0.2f);
             if(killerID!=-1)
+            {
                 killedByPlayer = true;
+                PlayerManager.instance.enemyKilled++;
+            }
             transform.DOShakePosition(1f, 0.5f,50,80f,false);
             transform.DOShakeRotation(1f, 0.1f,5,80f);
             dangerZone.SetActive(true);

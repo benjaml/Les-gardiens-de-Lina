@@ -42,7 +42,7 @@ public class Score : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        text.text = "Score " + score;
+        text.text = ""+score;
         if(combo != 1 && Time.time > lastPoint+timeBetweenPoint)
         {
             combo = 1;
@@ -63,7 +63,7 @@ public class Score : MonoBehaviour {
             comboImage.transform.DOPunchScale(new Vector3(1f, 1f, 0f) * 0.3f, 0.1f, 5, 0.1f);
         }
         lastPoint = Time.time;
-        text.transform.DOPunchScale(new Vector3(1f,1f,0f)*0.3f, 0.1f, 5, 0.1f);
+        text.transform.parent.DOPunchScale(new Vector3(1f,1f,0f)*0.3f, 0.1f, 5, 0.1f);
         Invoke("ResetScale",0.1f);
         score += (enemySize * multiplicateurScore)*combo;
         text.text = score.ToString();
@@ -71,7 +71,7 @@ public class Score : MonoBehaviour {
 
     void ResetScale()
     {
-        text.transform.localScale = Vector3.one;
+        text.transform.parent.localScale = Vector3.one;
         comboImage.transform.localScale = Vector3.one;
     }
 }

@@ -31,6 +31,7 @@ public class Player : MonoBehaviour, IDestroyable{
 
 
     bool invincible = false;
+    public float invincibleTime;
     bool shooting = false;
     bool repel = false;
     float shootStart;
@@ -38,9 +39,27 @@ public class Player : MonoBehaviour, IDestroyable{
 
     void Awake()
     {
+        foreach(GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            if(player.GetComponent<Player>().playerId == playerId && player!= gameObject)
+            {
+                Destroy(gameObject);
+            }
+        }
         Gun gun = gameObject.AddComponent<Gun>();
         gun.AttachTo(gameObject,typeof(Gun));
         healthPoint = maxHealthPoint;
+    }
+
+    void Start()
+    {
+        invincible = true;
+        Invoke("StopInvincible", invincibleTime);
+    }
+
+    void StopInvincible()
+    {
+        invincible = false;
     }
     void OnDrawGizmosSelected()
     {
@@ -82,6 +101,8 @@ public class Player : MonoBehaviour, IDestroyable{
 
     public void applyDamage(float damage, int killerID = -1)
     {
+        if (invincible)
+            return;
         healthPoint -= damage;
         if (healthPoint <= 0)
             Death();
